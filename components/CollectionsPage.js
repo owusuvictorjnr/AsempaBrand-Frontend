@@ -47,6 +47,7 @@ function CollectionsPage() {
                     key={category.id}
                     className="flex-shrink-0 w-full h-56 rounded-lg bg-gray-100 p-4 text-center"
                   >
+                      <Link href={`${routes.pages.collection(category.slug)}`}>
                     <Image
                       src={`${routes.images.base}${category.image}`}
                       alt={category.name}
@@ -54,6 +55,7 @@ function CollectionsPage() {
                       width={100}
                       height={100}
                     />
+                    </Link>
                     <p className="font-semibold mt-4">{category.name}</p>
                   </div>
                 ))}

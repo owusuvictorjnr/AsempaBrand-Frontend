@@ -91,7 +91,6 @@ function Index() {
 
     try {
       const response = await VerifyUser(payload);
-      console.log(response);
       router.push(routes.pages.login);
       setLoading(false);
     } catch (error) {
@@ -115,7 +114,6 @@ function Index() {
 
     try {
       const response = await ResendOTP(payload);
-      console.log(response);
       setResendLoading(false);
       setMessage('Verification Code Sent Sucessfully')
     } catch (error) {

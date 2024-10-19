@@ -7,7 +7,9 @@ const routes = {
     home:'/',
     login: '/auth',
     verification: '/auth/verification-code',
-    reset:`${basefrontendUrl}/auth/reset-password/`
+    reset:`${basefrontendUrl}/auth/reset-password/`,
+    category: (slug) => `/category?slug=${slug}`,
+    collection: (slug) => `/collection?slug=${slug}`,
   },
   
   // API routes
@@ -23,7 +25,15 @@ const routes = {
     getCategories:`${baseApiUrl}/categories/`,
     getCollections:`${baseApiUrl}/collections/`,
     getNewArrivals:`${baseApiUrl}/products/newest-releases/`,
-    getTopSellingProducts:`${baseApiUrl}/products/best-sellers/`
+    getTopSellingProducts:`${baseApiUrl}/products/best-sellers/`,
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    getaCategory:(slug) =>`${baseApiUrl}/categories/${slug}`,
+    getaCollection:(slug) =>`${baseApiUrl}/collections/${slug}`,
+
+
+
   },
 
   images:{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
@@ -6,91 +6,47 @@ import { BsFillBasket3Fill } from "react-icons/bs";
 import { IoHeartOutline } from "react-icons/io5";
 import { fetchNewArrivals } from "@/server/homeapi";
 import routes from "@/utils/routes";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import withAuth from "@/utils/withAuth";
 
-function NewArrival() {
-  const [products, setArrivals] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const data = await fetchNewArrivals();
-        setArrivals(data);
-      } catch (error) {
-        console.error("Failed to fetch categories", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCategories();
-  }, []);
-
-  // Scroll left function
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        top: 0,
-        left: -200,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  // Scroll right function
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        top: 0,
-        left: 200,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  if (!loading && products.length === 0) {
-    return null;
-  }
-  return (
-    <div className="pt-6 pb-10 p-4 relative">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">New Arrival</h2>
-        <Link href="/new-arrivals" className="text-brandPrimary hover:underline">
-          See All &gt;
-        </Link>
-      </div>
-
-      {/* Scroll buttons */}
-      <button
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow-md z-10"
-      >
-        <FaChevronLeft className="text-gray-600" />
-      </button>
-      <button
-        onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow-md z-10"
-      >
-        <FaChevronRight className="text-gray-600" />
-      </button>
-      {loading ? (
-        <>
-          {" "}
-          <div className="text-center">
-            <p className="text-gray-500">Loading New Arrivals...</p>
+function NewArrivalsPage() {
+    const [products, setArrivals] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const getCategories = async () => {
+        try {
+          const data = await fetchNewArrivals();
+          setArrivals(data);
+        } catch (error) {
+          console.error("Failed to fetch categories", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      getCategories();
+    }, []);
+  
+    return (
+        <div className="pb-14">
+          <div className="flex justify-center items-center h-32 bg-[#C691044D]">
+            <p className="text-black text-4xl font-semibold">New Arrivals</p>
           </div>
-        </>
-      ) : (
-        <>
-          {" "}
-          <div
-            ref={scrollRef}
-            className="flex space-x-4 overflow-x-auto scrollbar-hide p-4"
-            style={{ scrollBehavior: "smooth" }}
-          >
-            {products.slice(0, 10).map((product) => (
+          <p className="text-black text-sm p-4 ">
+            <Link href={routes.pages.home} className="text-black text-sm hover:underline">
+              Fashion
+            </Link>
+            /<span className="font-bold text-sm">New Arrivals</span>
+          </p>
+          {loading ? (
+            <div className="text-center">
+              <p className="text-gray-500">Loading New Arrivals...</p>
+            </div>
+          ) : (
+            <div className="p-4">
+    
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-8">
+              {products.slice(0, 10).map((product) => (
               <div
                 key={product.id}
                 className="flex-shrink-0 w-64 rounded-lg bg-gray-100 p-4 relative"
@@ -155,11 +111,13 @@ function NewArrival() {
                 </div>
               </div>
             ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-export default NewArrival;
+              </div>
+    
+            </div>
+           
+          )}
+        </div>
+      );
+    }
+    
+    export default withAuth(NewArrivalsPage);

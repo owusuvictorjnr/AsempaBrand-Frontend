@@ -1,13 +1,14 @@
 import React from "react";
 import Layout from "@/components/Layout";
-import CategoriesPage from "@/components/CategoriesPage";
 import KidsWear from "@/components/KidsWear";
 import SpecialRequestSection from "@/components/Request";
 import Footer from "@/components/Footer";
-function Categories() {
+import NewArrivalsPage from "@/components/NewArrivalsPage";
+import withAuth from "@/utils/withAuth";
+function New() {
   return (
     <Layout>
-      <CategoriesPage />
+   <NewArrivalsPage/>
       <KidsWear />
       <SpecialRequestSection />
       <Footer />
@@ -15,4 +16,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default withAuth (New);

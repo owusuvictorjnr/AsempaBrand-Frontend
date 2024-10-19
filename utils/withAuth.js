@@ -20,12 +20,12 @@ const withAuth = (WrappedComponent) => {
     useEffect(() => {
       const checkAuth = async () => {
         let accessToken = Cookies.get("access");
-
+//checking token 
         if (!accessToken || isTokenExpired(accessToken)) {
           router.push("/auth");
           return;
         }
-
+//chceking expiry
         try {
           const decodedToken = jwtDecode(accessToken);
           setTokenData(decodedToken);

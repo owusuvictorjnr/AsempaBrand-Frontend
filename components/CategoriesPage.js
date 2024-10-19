@@ -23,6 +23,10 @@ function CategoriesPage() {
 
     getCategories();
   }, []);
+
+
+
+  
   return (
     <div className="pb-14">
       <div className="flex justify-center items-center h-32 bg-[#C691044D]">
@@ -40,12 +44,14 @@ function CategoriesPage() {
         </div>
       ) : (
         <div className="p-4">
+
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-8">
             {categories.map((category) => (
               <div
                 key={category.id}
                 className="flex-shrink-0 w-full h-56 rounded-lg bg-gray-100 p-4 text-center"
               >
+                <Link href={`${routes.pages.category(category.slug)}`}>
                 <Image
                   src={`${routes.images.base}${category.image}`}
                   alt={category.name}
@@ -53,11 +59,17 @@ function CategoriesPage() {
                   width={100}
                   height={100}
                 />
+                </Link>
                 <p className="font-semibold mt-4">{category.name}</p>
               </div>
             ))}
           </div>
+
+
+
+
         </div>
+       
       )}
     </div>
   );

@@ -49,7 +49,7 @@ export default function Home() {
       payload = { email, frontend_url: routes.pages.reset };
     } else if (!isRegister) {
       // Login Request
-      payload = { email, password };
+      payload = { email, password,remember_me:rememberMe };
     } else {
       // Register Request
       payload = {
@@ -70,8 +70,8 @@ export default function Home() {
         setLoading(false);
       } else if (!isRegister) {
         const response = await loginUser(payload);
-        const decodedToken = jwtDecode(response.access_token);
-        Cookies.set("access", response.access_token, {
+        const decodedToken = jwtDecode(response.access);
+        Cookies.set("access", response.access, {
           expires: decodedToken.exp * 1000 < Date.now(),
           secure: true,
           sameSite: "Strict",
@@ -112,7 +112,6 @@ export default function Home() {
           id_token: idToken, 
         }
       );
-      console.log(response.data)
       const decodedToken = jwtDecode(response.data.access_token);
       Cookies.set("access", response.data.access_token, {
         expires: decodedToken.exp * 1000 < Date.now(),

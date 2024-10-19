@@ -18,7 +18,6 @@ function TopProducts() {
       try {
         const data = await fetchTopSelling();
         setTopProducts(data);
-        console.log(data);
       } catch (error) {
         console.error("Failed to fetch categories", error);
       } finally {
@@ -58,7 +57,7 @@ function TopProducts() {
     <div className="pt-6 pb-10 p-4 relative">
       <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-bold">Top Selling Products</h2>
-        <Link href="/shop-all" className="text-brandPrimary hover:underline">
+        <Link href="/top-products" className="text-brandPrimary hover:underline">
           See All &gt;
         </Link>
       </div>
