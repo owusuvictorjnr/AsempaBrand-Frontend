@@ -84,7 +84,7 @@ function SingleCollection() {
                   <IoHeartOutline />
                 </div>
               </div>
-
+              <Link href={routes.pages.detials(product.slug)}>
               <Image
                 src={`${routes.images.base}${product.featured_image}`}
                 alt={product.name}
@@ -92,6 +92,7 @@ function SingleCollection() {
                 width={100}
                 className="h-36 mx-auto mb-2 rounded cursor-pointer"
               />
+              </Link>
               <h3 className="text-base font-bold mb-2">{product.name}</h3>
               <p className="text-gray-500 text-xs mb-4">
                 {product.short_description}

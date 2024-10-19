@@ -53,8 +53,6 @@ const Navbar = () => {
               <option value="women">Women</option>
               <option value="men">Men</option>
               <option value="kids">Kids</option>
-              <option value="accessories">Accessories</option>
-              <option value="footwear">Footwear</option>
             </select>
             <input
               type="text"
@@ -122,15 +120,7 @@ const Navbar = () => {
             >
               Kids Clothing <FaChevronDown className="ml-1 text-orange-500" />
             </Link>
-            <Link href="/accessories" className="text-white flex items-center">
-              Accessories <FaChevronDown className="ml-1 text-orange-500" />
-            </Link>
-            <Link href="/footwear" className="text-white flex items-center">
-              Footwear <FaChevronDown className="ml-1 text-orange-500" />
-            </Link>
-            <Link href="/rewards" className="text-white flex items-center">
-              Rewards <FaChevronDown className="ml-1 text-orange-500" />
-            </Link>
+
           </nav>
         </div>
       </header>

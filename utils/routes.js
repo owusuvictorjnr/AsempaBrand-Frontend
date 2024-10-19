@@ -10,6 +10,7 @@ const routes = {
     reset:`${basefrontendUrl}/auth/reset-password/`,
     category: (slug) => `/category?slug=${slug}`,
     collection: (slug) => `/collection?slug=${slug}`,
+    detials: (slug) => `/details?slug=${slug}`,
   },
   
   // API routes
@@ -31,6 +32,7 @@ const routes = {
 
     getaCategory:(slug) =>`${baseApiUrl}/categories/${slug}`,
     getaCollection:(slug) =>`${baseApiUrl}/collections/${slug}`,
+    getaProduct:(slug) =>`${baseApiUrl}/products/${slug}`
 
 
 
