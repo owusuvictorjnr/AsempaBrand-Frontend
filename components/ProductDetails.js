@@ -69,7 +69,14 @@ const ProductDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+                  <p className="text-black text-sm pb-3">
+            <Link href={routes.pages.home} className="text-black text-sm hover:underline">
+              Fashion
+            </Link>
+            /<span className="font-bold text-sm">{product.category}</span>
+          </p>
       <div className="lg:flex lg:space-x-8 lg:px-36 px-4">
+        
         {/* Image Gallery */}
         <div className="lg:w-1/2 w-full mb-8 lg:mb-0">
           <div className="mb-4 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative bg-[#F3F3F3] rounded-xl">
