@@ -5,9 +5,13 @@ import SpecialRequestSection from "@/components/Request";
 import Footer from "@/components/Footer";
 import NewArrivalsPage from "@/components/NewArrivalsPage";
 import withAuth from "@/utils/withAuth";
+import Head from "next/head";
 function New() {
   return (
     <Layout>
+         <Head>
+      <title>AsempaBrand | New Arrivals</title>
+      </Head>
    <NewArrivalsPage/>
       <KidsWear />
       <SpecialRequestSection />
