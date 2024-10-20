@@ -10,10 +10,10 @@ import Head from "next/head";
 function Details() {
   return (
     <Layout>
-         <Head>
-      <title>AsempaBrand | Details</title>
+      <Head>
+        <title>AsempaBrand | Details</title>
       </Head>
-<ProductDetails/>
+      <ProductDetails />
       <KidsWear />
       <SpecialRequestSection />
       <Footer />

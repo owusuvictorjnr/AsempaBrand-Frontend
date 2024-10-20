@@ -13,6 +13,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [selectedVariantPrice, setSelectedVariantPrice]=useState(null)
   const [variantImages, setVariantImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("description");
@@ -28,6 +29,8 @@ const ProductDetails = () => {
           setSelectedImage(data.product_images[0].image);
           setSelectedVariant(null);
           setVariantImages(data.product_images);
+          //Default Current Price 
+          setSelectedVariantPrice(null)
         } catch (error) {
           console.error("Failed to fetch product data", error);
         } finally {
@@ -46,14 +49,17 @@ const ProductDetails = () => {
       setSelectedVariant(null);
       setSelectedImage(product.product_images[0].image);
       setVariantImages(product.product_images);
+      setSelectedVariantPrice(product.current_price)
     } else {
       setSelectedVariant(variant);
       if (variant.images && variant.images.length > 0) {
         setSelectedImage(variant.images[0].image);
         setVariantImages(variant.images);
+        setSelectedVariantPrice(variant.current_price);
       } else {
         setSelectedImage(product.product_images[0].image);
         setVariantImages(product.product_images);
+        setSelectedVariantPrice(product.current_price)
       }
     }
   };
@@ -124,7 +130,10 @@ const ProductDetails = () => {
             </span>
           </div>
           <div className="text-2xl sm:text-3xl font-bold mb-4">
-            ${product.current_price}
+            {selectedVariantPrice ?(<>
+            {selectedVariantPrice}
+            </>):(<>
+            {product.current_price}</>)}
           </div>
 
           {/* Variant Selection */}
