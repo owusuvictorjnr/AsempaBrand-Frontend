@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Head from "next/head";
@@ -11,29 +11,36 @@ export default function ResetPassword() {
   const [confirm_password, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [message, setMessage] = useState(''); // State to handle errors
-  const [loading, setLoading] = useState(false); // State to handle loading
-  const [errors, setErrors] = useState({}); // State to handle errors
-  const router = useRouter(); // Access the router
-  const { uid, token } = router.query; // Extract uid and token from URL query params
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const router = useRouter();
 
-      // Hide message and error after 10 seconds
-  // Hide message and errors after 10 seconds and redirect
+  let uid, token;
+
+  if (router.asPath.includes('?')) {
+    const urlParts = router.asPath.split('?')[1].split('/');
+    uid = urlParts[1]; 
+    token = urlParts[2]; 
+  }
+
+  useEffect(() => {
+    console.log('UID:', uid); 
+    console.log('Token:', token); 
+  }, [uid, token]);
+
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
         setMessage("");
         setErrors({});
 
-        // Redirect to home page after clearing the message
-        router.push(`${routes.pages.login}`); // Redirect to home page
-      }, 3000); // Hide after 10 seconds
+        router.push(`${routes.pages.login}`);
+      }, 3000);
 
-      // Cleanup timer on component unmount or if message changes
       return () => clearTimeout(timer);
     }
-  }, [message, router]); // Ensure router is included in the dependency array
-
+  }, [message, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,10 +49,10 @@ export default function ResetPassword() {
     const payload = { new_password, confirm_password };
 
     try {
-      const response = await ResetUserPassword(uid,token,payload);
-      setMessage(response.message)
-      setNewPassword("")
-      setConfirmPassword("")
+      const response = await ResetUserPassword(uid, token, payload);
+      setMessage(response.message);
+      setNewPassword("");
+      setConfirmPassword("");
       setLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -90,16 +97,17 @@ export default function ResetPassword() {
               />
             </div>
 
-
             <h2 className="text-xl font-semibold mb-4 text-center justify-center">
               Reset Password
             </h2>
             <p className="text-gray-500 mb-6 text-xs text-center justify-center">
               Enter new password
             </p>
-            {message&& (
-                  <p className="text-center text-xs mt-1 p-2 bg-green-600 text-white mb-2 rounded-md">{message}</p>
-                )}
+            {message && (
+              <p className="text-center text-xs mt-1 p-2 bg-green-600 text-white mb-2 rounded-md">
+                {message}
+              </p>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="mb-4 relative">
                 <input
@@ -121,10 +129,10 @@ export default function ResetPassword() {
                   )}
                 </div>
                 {errors.new_password && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.new_password[0]}
-                    </p>
-                  )}
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.new_password[0]}
+                  </p>
+                )}
               </div>
 
               <div className="mb-4 relative">
@@ -147,19 +155,17 @@ export default function ResetPassword() {
                   )}
                 </div>
                 {errors.confirm_password && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.confirm_password[0]}
-                    </p>
-                  )}
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.confirm_password[0]}
+                  </p>
+                )}
               </div>
 
               <button
                 type="submit"
                 className=" text-xs w-full bg-brandPrimary text-white py-3 rounded-md"
               >
-                   {loading
-                  ? "Processing.Please Wait..."
-                  :"Reset Password"}
+                {loading ? "Processing.Please Wait..." : "Reset Password"}
               </button>
             </form>
           </div>

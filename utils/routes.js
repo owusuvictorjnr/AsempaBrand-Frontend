@@ -7,7 +7,7 @@ const routes = {
     home:'/',
     login: '/auth',
     verification: '/auth/verification-code',
-    reset:`${basefrontendUrl}/auth/reset-password/`,
+    reset:`${basefrontendUrl}/auth/reset-password?`,
     category: (slug) => `/category?slug=${slug}`,
     collection: (slug) => `/collection?slug=${slug}`,
     detials: (slug) => `/details?slug=${slug}`,
